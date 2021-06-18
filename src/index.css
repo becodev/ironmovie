@@ -6,3 +6,8 @@ body {
 .logo {
   max-height: 37px;
 }
+
+footer {
+  height: 60px;
+  width: 100%;
+}

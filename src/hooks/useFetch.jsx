@@ -1,16 +1,16 @@
 //custom hook developed by @becodev
 import { useState, useEffect } from "react";
 
-export const useFetch = (url) => {
+export const useFetch = (url, option = {}) => {
   const [data, setData] = useState(null);
   const [isPending, setIsPending] = useState(true);
   const [error, setError] = useState(null);
 
-  const getData = async (url) => {
+  const getData = async (url, option = {}) => {
     try {
-      let res = await fetch(url);
+      let res = await fetch(url, option);
 
-      if (!res.ok) {
+      if (res.status >= 400) {
         throw new Error({
           err: true,
           status: res.status,
@@ -29,8 +29,8 @@ export const useFetch = (url) => {
   };
 
   useEffect(() => {
-    getData(url);
-  }, [url]);
+    getData(url, option);
+  }, [url, option]);
 
   return { data, isPending, error };
 };
