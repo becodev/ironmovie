@@ -11,3 +11,11 @@ footer {
   height: 60px;
   width: 100%;
 }
+
+.card {
+  max-width: 480px;
+}
+
+.carousel-item {
+  height: 80vh;
+}
