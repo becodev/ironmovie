@@ -9,8 +9,8 @@ const Menu = () => {
     <>
       <nav className="navbar navbar-light bg-light">
         <div className="container">
-          <a className="navbar-brand" href="/">
-            <img src={logo} alt="logo" className="logo" />
+          <a className="navbar-brand" href="#/">
+            <h1 className="main-title">ironmovies</h1>
           </a>
           <div className="row">
             <div className="col input-group input-group-sm ">

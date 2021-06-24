@@ -5,19 +5,21 @@ import Footer from "./components/Footer";
 import Home from "./components/Home";
 import Menu from "./components/Menu";
 import DataProvider from "./context/DataProvider";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import "./index.css";
 
 function App() {
   return (
-    <DataProvider>
-      <Menu />
+    <Router>
+      <DataProvider>
+        <Home />
 
-      <Home />
+        <Route path="/search" component={CardContainer} />
+        <CardContainer />
 
-      <CardContainer />
-
-      <Footer />
-    </DataProvider>
+        <Footer />
+      </DataProvider>
+    </Router>
   );
 }
 
