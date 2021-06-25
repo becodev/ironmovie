@@ -4,11 +4,9 @@ import { DataContext } from "../context/DataProvider";
 const Menu = () => {
   const { handleSubmit, search, setSearch, error, response, formSent } =
     useContext(DataContext);
-  useEffect(() => {
-    if (formSent && response.length === 0) {
-      console.log("no hay resultados");
-    }
-  }, [response, formSent]);
+
+  useEffect(() => {}, [response, formSent]);
+
   return (
     <>
       <nav className="navbar navbar-light bg-light">
@@ -34,7 +32,7 @@ const Menu = () => {
 
                 <div className="invalid-feedback">
                   {formSent && response.length === 0
-                    ? "No hay resultados"
+                    ? "No hay resultados para su busqueda"
                     : "Ingrese un termino de busqueda"}
                 </div>
               </form>

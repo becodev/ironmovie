@@ -4,7 +4,7 @@ import MovieItem from "./MovieItem";
 import { DataContext } from "../context/DataProvider";
 
 const Home = (props) => {
-  const { formSent, response } = useContext(DataContext);
+  const { response } = useContext(DataContext);
   const [homeMovie, setHomeMovie] = useState();
   const homeMovies = async () => {
     const url = `https://api.themoviedb.org/3/trending/all/day?api_key=753712b78a942c2223e77095da519016&language=es`;
@@ -34,7 +34,7 @@ const Home = (props) => {
     if (response.length !== 0) {
       props.history.push("/search");
     }
-  }, [formSent, response]);
+  }, [response]);
   return (
     <>
       <CarouselComponent />
