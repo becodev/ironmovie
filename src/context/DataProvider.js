@@ -4,11 +4,17 @@ export const DataContext = createContext();
 
 const DataProvider = ({ children }) => {
   const [search, setSearch] = useState("");
-  const [response, setResponse] = useState(null);
+  const [response, setResponse] = useState([]);
   const [formSent, setFormSent] = useState(false);
+  const [error, setError] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault(e);
+
+    if (!search) {
+      setError(true);
+      return null;
+    }
 
     const url = `https://api.themoviedb.org/3/search/movie?query=${search}&api_key=753712b78a942c2223e77095da519016&language=en`;
     const res = await fetch(url, {
@@ -18,24 +24,21 @@ const DataProvider = ({ children }) => {
       },
     });
     const data = await res.json();
+    data && data.results.length === 0 ? setError(true) : setError(false);
     setResponse(data.results);
-    setFormSent(true);
     setSearch("");
-  };
-
-  const handleChange = (e) => {
-    setSearch(e.target.value);
+    setFormSent(true);
   };
 
   return (
     <DataContext.Provider
       value={{
-        handleChange,
         handleSubmit,
         search,
         setSearch,
         response,
         formSent,
+        error,
       }}
     >
       {children}

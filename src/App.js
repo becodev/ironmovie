@@ -1,22 +1,22 @@
 import React from "react";
 import CallApi from "./api/api";
-import CardContainer from "./components/CardContainer";
+import Search from "./components/Search";
 import Footer from "./components/Footer";
 import Home from "./components/Home";
 import Menu from "./components/Menu";
 import DataProvider from "./context/DataProvider";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./index.css";
 
 function App() {
   return (
     <Router>
       <DataProvider>
-        <Home />
-
-        <Route path="/search" component={CardContainer} />
-        <CardContainer />
-
+        <Menu />
+        <Switch>
+          <Route exact path="/search" component={Search} />
+          <Route path="/" component={Home} />
+        </Switch>
         <Footer />
       </DataProvider>
     </Router>

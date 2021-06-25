@@ -1,29 +1,42 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { DataContext } from "../context/DataProvider";
-import logo from "../assets/ironmovies.png";
 
 const Menu = () => {
-  const { handleChange, handleSubmit, search } = useContext(DataContext);
-
+  const { handleSubmit, search, setSearch, error, response, formSent } =
+    useContext(DataContext);
+  useEffect(() => {
+    if (formSent && response.length === 0) {
+      console.log("no hay resultados");
+    }
+  }, [response, formSent]);
   return (
     <>
       <nav className="navbar navbar-light bg-light">
         <div className="container">
-          <a className="navbar-brand" href="#/">
+          <a className="navbar-brand" href="/">
             <h1 className="main-title">ironmovies</h1>
           </a>
           <div className="row">
             <div className="col input-group input-group-sm ">
-              <form onSubmit={handleSubmit}>
+              <form
+                className="needs-validation"
+                onSubmit={handleSubmit}
+                noValidate
+              >
                 <input
-                  type="text"
-                  className="form-control"
-                  aria-label="Sizing example input"
-                  aria-describedby="inputGroup-sizing-sm"
                   value={search}
-                  onChange={handleChange}
+                  onChange={(e) => setSearch(e.target.value)}
+                  type="text"
+                  className={error ? "form-control is-invalid" : "form-control"}
                   placeholder="Buscar peliculas..."
+                  required
                 />
+
+                <div className="invalid-feedback">
+                  {formSent && response.length === 0
+                    ? "No hay resultados"
+                    : "Ingrese un termino de busqueda"}
+                </div>
               </form>
             </div>
           </div>

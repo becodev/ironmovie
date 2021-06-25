@@ -6,7 +6,7 @@ const CarouselComponent = () => {
   const [index, setIndex] = useState(0);
 
   const api = async () => {
-    const url = `https://api.themoviedb.org/3/trending/all/day?api_key=753712b78a942c2223e77095da519016`;
+    const url = `https://api.themoviedb.org/3/trending/all/day?api_key=753712b78a942c2223e77095da519016&language=es`;
     const res = await fetch(url, {
       mode: "cors",
       headers: {
@@ -18,7 +18,6 @@ const CarouselComponent = () => {
   };
   useEffect(() => {
     api();
-    console.log("recarga");
   }, []);
 
   const handleSelect = (selectedIndex, e) => {

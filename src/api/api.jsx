@@ -30,6 +30,7 @@ export default class CallApi {
     const { params = {} } = options;
     const queryStringParams = {
       api_key: API_KEY,
+      language: "es",
       ...params,
     };
     return fetchApi(
