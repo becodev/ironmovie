@@ -1,6 +1,7 @@
 import React from "react";
 import ReactStars from "react-rating-stars-component";
 import { Link } from "react-router-dom";
+import { noImage, noPoster, imageUrl } from "../constants";
 
 const MovieItem = (props) => {
   const { backdrop_path, original_title, vote_average, id, release_date } =
@@ -16,7 +17,7 @@ const MovieItem = (props) => {
     <div className="card" style={{ width: "100%" }}>
       <img
         className="card-img-top card-img--height"
-        src={`https://image.tmdb.org/t/p/w500/${backdrop_path}`}
+        src={backdrop_path ? `${imageUrl}${backdrop_path}` : noImage}
         alt="poster"
       />
       <div className="card-body">
