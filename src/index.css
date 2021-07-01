@@ -1,6 +1,22 @@
+html {
+  min-height: 100%;
+  position: relative;
+}
+
 body {
-  display: block;
-  margin: 0px;
+  margin: 0;
+  margin-bottom: 50px;
+}
+
+.carousel-caption {
+  position: absolute;
+  width: 100%;
+  bottom: 0px;
+  right: 0;
+  left: 0;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.65);
+  padding: 10px 20px;
 }
 
 .main-title {
@@ -13,15 +29,25 @@ body {
   flex-direction: row;
 }
 
+.movie-item {
+  padding-bottom: 0;
+  margin-bottom: 20px;
+}
+
 .card {
   max-width: 400px;
   margin: 20px;
   padding: 0;
 }
 
-footer {
-  height: 60px;
+.footer {
+  height: 70px;
   width: 100%;
+  position: absolute;
+  bottom: 0;
+}
+.footer p {
+  margin: 0;
 }
 
 .slide img {
@@ -29,13 +55,6 @@ footer {
   object-fit: cover;
 }
 
-.carousel-caption {
-  position: absolute;
-  width: 100%;
-  bottom: 0px;
-  right: 0;
-  left: 0;
-  text-align: center;
-  background-color: rgba(0, 0, 0, 0.65);
-  padding: 10px 20px;
+.movie-detail {
+  margin-top: 25px;
 }

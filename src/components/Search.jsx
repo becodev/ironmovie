@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { DataContext } from "../context/DataProvider";
-import Card from "./Card";
 import MovieItem from "./MovieItem";
 
 const Search = () => {

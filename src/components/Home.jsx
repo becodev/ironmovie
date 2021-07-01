@@ -21,7 +21,7 @@ const Home = (props) => {
   const movieList = () => {
     if (homeMovie === undefined) return null;
     return (
-      <div className="row">
+      <div className="row movie-item">
         {homeMovie.map((mov) => (
           <MovieItem key={mov.id} {...mov} />
         ))}

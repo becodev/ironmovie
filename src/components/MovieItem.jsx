@@ -1,7 +1,7 @@
 import React from "react";
 import ReactStars from "react-rating-stars-component";
 import { Link } from "react-router-dom";
-import { noImage, noPoster, imageUrl } from "../constants";
+import { noImage, imageUrl } from "../constants";
 
 const MovieItem = (props) => {
   const { backdrop_path, original_title, vote_average, id, release_date } =
@@ -37,7 +37,7 @@ const MovieItem = (props) => {
         </div>
         <div className="btn btn-light d-flex justify-content-center">
           {" "}
-          <Link to={`/movie/${id}/detail`} className="">
+          <Link to={`/movie/${id}`} className="">
             Ver detalles
           </Link>
         </div>
