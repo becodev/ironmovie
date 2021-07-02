@@ -8,6 +8,15 @@ body {
   margin-bottom: 50px;
 }
 
+.buttons {
+  margin-top: 15px;
+}
+
+.button-genre:hover {
+  border-radius: 3px;
+  border-color: black;
+}
+
 .carousel-caption {
   position: absolute;
   width: 100%;

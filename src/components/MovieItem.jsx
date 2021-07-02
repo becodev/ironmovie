@@ -1,11 +1,18 @@
 import React from "react";
+import { Badge } from "react-bootstrap";
 import ReactStars from "react-rating-stars-component";
 import { Link } from "react-router-dom";
 import { noImage, imageUrl } from "../constants";
 
 const MovieItem = (props) => {
-  const { backdrop_path, original_title, vote_average, id, release_date } =
-    props;
+  const {
+    backdrop_path,
+    original_title,
+    vote_average,
+    id,
+    release_date,
+    adult,
+  } = props;
 
   const star = {
     size: 30,
@@ -33,6 +40,11 @@ const MovieItem = (props) => {
         </div>
 
         <div className="card-text">
+          {adult ? (
+            <span class="badge bg-danger">Adults</span>
+          ) : (
+            <span class="badge bg-success">ATP</span>
+          )}
           <ReactStars {...star} />
         </div>
         <div className="btn btn-light d-flex justify-content-center">

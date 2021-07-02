@@ -1,5 +1,4 @@
 import React from "react";
-import CallApi from "./api/api";
 import Search from "./components/Search";
 import Footer from "./components/Footer";
 import Home from "./components/Home";
