@@ -8,13 +8,18 @@ body {
   margin-bottom: 50px;
 }
 
-.buttons {
-  margin-top: 15px;
+.button-genre {
+  margin: 2px 4px;
+  border-radius: 0;
+  border-color: rgba(79, 199, 255, 0.5);
 }
 
 .button-genre:hover {
-  border-radius: 3px;
   border-color: black;
+}
+
+.button-genre:first-child {
+  margin-left: 0;
 }
 
 .carousel-caption {
@@ -34,14 +39,16 @@ body {
 }
 
 .movies {
-  display: flex;
-  flex-direction: row;
-}
+  background-color: black;
 
+  align-content: center;
+}
+/* 
 .movie-item {
   padding-bottom: 0;
   margin-bottom: 20px;
-}
+  margin-left: 0;
+} */
 
 .card {
   max-width: 400px;
@@ -60,7 +67,7 @@ body {
 }
 
 .slide img {
-  height: 70vh;
+  height: 74vh;
   object-fit: cover;
 }
 

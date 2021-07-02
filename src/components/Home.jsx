@@ -17,25 +17,29 @@ const Home = (props) => {
   const movieList = () => {
     if (homeMovie === undefined) return null;
     return (
-      <div className="row movie-item">
+      <section className="row">
         {homeMovie.map((mov) => (
           <MovieItem key={mov.id} {...mov} />
         ))}
-      </div>
+      </section>
     );
   };
 
   const handleGenre = (genre) => {
-    return genre.map((gen) => (
-      <button
-        key={gen.id}
-        className="button-genre btn btn-light"
-        onClick={() => setGenreSelected(gen.id)}
-      >
-        {" "}
-        {gen.name}{" "}
-      </button>
-    ));
+    return (
+      <div className="btn-group d-flex flex-wrap justify-content-between">
+        {genre.map((gen) => (
+          <button
+            key={gen.id}
+            className="button-genre btn btn-light genre"
+            onClick={() => setGenreSelected(gen.id)}
+          >
+            {" "}
+            {gen.name}{" "}
+          </button>
+        ))}
+      </div>
+    );
   };
 
   useEffect(() => {
@@ -45,14 +49,13 @@ const Home = (props) => {
       props.history.push("/search");
     }
   }, [response, genreSelected]);
-  //
+
   return (
     <div className="container">
       <CarouselComponent />
-      <div className="buttons btn-group d-flex flex-wrap justify-content-between">
-        {handleGenre(genres)}
-      </div>
-      <div className="container movies">{movieList()}</div>
+      <span className="badge bg-primary mt-2 mb-2">GENEROS</span>
+      {handleGenre(genres)}
+      {movieList()}
     </div>
   );
 };

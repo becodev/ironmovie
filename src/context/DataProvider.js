@@ -1,4 +1,6 @@
 import React, { useState, createContext } from "react";
+import CallApi from "../api/api";
+
 export const DataContext = createContext();
 
 const DataProvider = ({ children }) => {
@@ -10,63 +12,48 @@ const DataProvider = ({ children }) => {
   const [genres, setGenres] = useState([]);
   const [genreSelected, setGenreSelected] = useState(28);
   const [info, setInfo] = useState({});
+  const [movies, setMovies] = useState(null);
+
+  const getTrending = async () => {
+    CallApi.get(`/trending/all/day`, {
+      params: {},
+    }).then((data) => setMovies(data.results));
+  };
 
   const movieInfo = async (id) => {
-    const url = `https://api.themoviedb.org/3/movie/${id}?api_key=753712b78a942c2223e77095da519016&language=es`;
-    const res = await fetch(url, {
-      mode: "cors",
-      headers: {
-        "Content-type": "application/json",
-      },
-    });
-    const data = await res.json();
-    setInfo(data);
+    CallApi.get(`/movie/${id}`, {
+      params: {},
+    }).then((data) => setInfo(data));
   };
 
   const getGenres = async () => {
-    const url = `https://api.themoviedb.org/3/genre/movie/list?api_key=753712b78a942c2223e77095da519016&language=es`;
-    const res = await fetch(url, {
-      mode: "cors",
-      headers: {
-        "Content-type": "application/json",
-      },
-    });
-    const data = await res.json();
-    setGenres(data.genres);
+    CallApi.get(`/genre/movie/list`, {
+      params: {},
+    }).then((data) => setGenres(data.genres));
   };
 
   const homeMovies = async () => {
-    const url = `https://api.themoviedb.org/3/discover/movie?api_key=753712b78a942c2223e77095da519016&language=es&with_genres=${genreSelected}`;
-    const res = await fetch(url, {
-      mode: "cors",
-      headers: {
-        "Content-type": "application/json",
-      },
-    });
-    const data = await res.json();
-    setHomeMovie(data.results);
+    CallApi.get(`/discover/movie`, {
+      params: { with_genres: genreSelected },
+    }).then((data) => setHomeMovie(data.results));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault(e);
+    setFormSent(true);
 
     if (!search) {
       setError(true);
       return null;
     }
 
-    const url = `https://api.themoviedb.org/3/search/movie?query=${search}&api_key=753712b78a942c2223e77095da519016&language=es`;
-    const res = await fetch(url, {
-      mode: "cors",
-      headers: {
-        "Content-type": "application/json",
-      },
+    const res = await CallApi.get(`/search/movie`, {
+      params: { query: search },
     });
-    const data = await res.json();
-    data && data.results.length === 0 ? setError(true) : setError(false);
-    setResponse(data.results);
+    res && res.results.length === 0 ? setError(true) : setError(false);
+    setResponse(res.results);
     setSearch("");
-    setFormSent(true);
+    setFormSent(false);
   };
 
   return (
@@ -78,6 +65,8 @@ const DataProvider = ({ children }) => {
         homeMovies,
         setGenreSelected,
         movieInfo,
+        getTrending,
+        movies,
         info,
         homeMovie,
         genres,

@@ -6,11 +6,14 @@ import { noPoster, imageUrl } from "../constants";
 const MovieDetail = (props) => {
   const { id } = props.match.params;
 
-  const { info, movieInfo } = useContext(DataContext);
+  const { info, movieInfo, formSent } = useContext(DataContext);
 
   useEffect(() => {
     movieInfo(id);
-  }, []);
+    if (formSent) {
+      props.history.push("/search");
+    }
+  }, [formSent]);
 
   const { overview, title, poster_path, release_date, runtime } = info;
 
@@ -23,7 +26,6 @@ const MovieDetail = (props) => {
           ) : (
             <img
               height={400}
-              className=""
               src={!poster_path ? `${noPoster}` : `${imageUrl}${poster_path}`}
               alt={title}
             />

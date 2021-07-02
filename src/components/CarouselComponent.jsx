@@ -1,24 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Carousel from "react-bootstrap/Carousel";
+import { DataContext } from "../context/DataProvider";
 import { Link } from "react-router-dom";
 
 const CarouselComponent = () => {
-  const [movies, setMovies] = useState(null);
   const [index, setIndex] = useState(0);
 
-  const api = async () => {
-    const url = `https://api.themoviedb.org/3/trending/all/day?api_key=753712b78a942c2223e77095da519016&language=es`;
-    const res = await fetch(url, {
-      mode: "cors",
-      headers: {
-        "Content-type": "application/json",
-      },
-    });
-    const data = await res.json();
-    setMovies(data.results);
-  };
+  const { getTrending, movies } = useContext(DataContext);
+
   useEffect(() => {
-    api();
+    getTrending();
   }, []);
 
   const handleSelect = (selectedIndex, e) => {
@@ -27,8 +18,10 @@ const CarouselComponent = () => {
 
   const modal = (movies) => {
     if (!movies) return null;
+
     return movies.map((film) => {
       const { backdrop_path, title, overview, id } = film;
+
       return (
         <Carousel.Item key={id}>
           <Link to={`/movie/${id}`}>
@@ -48,7 +41,7 @@ const CarouselComponent = () => {
     });
   };
   return (
-    <div className="container">
+    <div className="container p-0">
       <Carousel variant="dark" onSelect={handleSelect}>
         {modal(movies)}
       </Carousel>

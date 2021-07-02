@@ -1,18 +1,11 @@
 import React from "react";
-import { Badge } from "react-bootstrap";
 import ReactStars from "react-rating-stars-component";
 import { Link } from "react-router-dom";
 import { noImage, imageUrl } from "../constants";
 
 const MovieItem = (props) => {
-  const {
-    backdrop_path,
-    original_title,
-    vote_average,
-    id,
-    release_date,
-    adult,
-  } = props;
+  const { backdrop_path, original_title, vote_average, id, release_date } =
+    props;
 
   const star = {
     size: 30,
@@ -21,12 +14,14 @@ const MovieItem = (props) => {
     count: 5,
   };
   return (
-    <div className="card" style={{ width: "100%" }}>
-      <img
-        className="card-img-top card-img--height"
-        src={backdrop_path ? `${imageUrl}${backdrop_path}` : noImage}
-        alt="poster"
-      />
+    <div className="card">
+      <Link to={`/movie/${id}`}>
+        <img
+          className="card-img-top card-img--height"
+          src={backdrop_path ? `${imageUrl}${backdrop_path}` : noImage}
+          alt={original_title}
+        />
+      </Link>
       <div className="card-body">
         <div className="card-title d-flex justify-content-between">
           <div className="d-inline">
@@ -40,18 +35,11 @@ const MovieItem = (props) => {
         </div>
 
         <div className="card-text">
-          {adult ? (
-            <span class="badge bg-danger">Adults</span>
-          ) : (
-            <span class="badge bg-success">ATP</span>
-          )}
           <ReactStars {...star} />
         </div>
         <div className="btn btn-light d-flex justify-content-center">
           {" "}
-          <Link to={`/movie/${id}`} className="">
-            Ver detalles
-          </Link>
+          <Link to={`/movie/${id}`}>Ver detalles</Link>
         </div>
       </div>
     </div>
